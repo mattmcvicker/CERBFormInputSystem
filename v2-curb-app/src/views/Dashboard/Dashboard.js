@@ -17,12 +17,6 @@ import CustomTabs from "components/CustomTabs/CustomTabs.js";
 
 import { currentProjects, submittedProjects } from "variables/general.js";
 
-import {
-  dailySalesChart,
-  emailsSubscriptionChart,
-  completedTasksChart
-} from "variables/charts.js";
-
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 const useStyles = makeStyles(styles);
