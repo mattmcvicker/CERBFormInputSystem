@@ -10,12 +10,14 @@ import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import Modal from "@material-ui/core/Modal"
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 // @material-ui/icons
 import Edit from "@material-ui/icons/Edit";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 // core components
 import styles from "assets/jss/material-dashboard-react/components/tasksStyle.js";
-
+import PQPR from "../Forms/pqpr" //Planning quarterly reports form component
 const useStyles = makeStyles(styles);
 function getModalStyle() {
   const top = 50;
@@ -31,11 +33,13 @@ function getModalStyle() {
 const ModalStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: "50%",
-    backgroundColor: "theme.palette.background.paper",
+    width: "60%",
+    height: "60%",
+    backgroundColor: "#eeeeee",
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    overflow: "scroll"
   },
 }));
 
@@ -69,19 +73,13 @@ export default function Tasks(props) {
 
   const body = (
     <div style={modalStyle} className={ModalClasses.paper}>
-      <h2 id="simple-modal-title">Sample Form</h2>
-      <p id="simple-modal-description">
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.Duis mollis, est non commodo luctus, nisi erat porttitor ligula.Duis mollis, est non commodo luctus, nisi erat porttitor ligula.Duis mollis, est non commodo luctus, nisi erat porttitor ligula.Duis mollis, est non commodo luctus, nisi erat porttitor ligula.Duis mollis, est non commodo luctus, nisi erat porttitor ligula.Duis mollis, est non commodo luctus, nisi erat porttitor ligula.Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-      </p>
+      <PQPR></PQPR>
     </div>
   );
   const { tasksIndexes, tasks, rtlActive } = props;
   const tableCellClasses = classnames(classes.tableCell, {
     [classes.tableCellRTL]: rtlActive
   });
-
-
-
 
   return (
     <div>
@@ -131,8 +129,15 @@ export default function Tasks(props) {
           onClose={handleClose}
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
         >
-          {body}
+          <Fade in={open}>
+            {body}
+          </Fade>
         </Modal>
       </div>
     </div>
