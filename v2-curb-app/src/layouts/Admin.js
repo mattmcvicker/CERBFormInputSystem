@@ -96,7 +96,7 @@ export default function Admin({ ...rest }) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
-        logoText={"CURB FORM INPUT SYSTEM"}
+        logoText={"CERB SYSTEM"}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}
