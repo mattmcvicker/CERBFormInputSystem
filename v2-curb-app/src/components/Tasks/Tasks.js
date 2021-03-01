@@ -12,6 +12,8 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 // @material-ui/icons
 import Edit from "@material-ui/icons/Edit";
+import VisibilityIcon from '@material-ui/icons/Visibility';
+
 import Close from "@material-ui/icons/Close";
 import Check from "@material-ui/icons/Check";
 // core components
@@ -42,13 +44,13 @@ export default function Tasks(props) {
         {tasksIndexes.map(value => (
           <TableRow key={value} className={classes.tableRow}>
             <TableCell className={tableCellClasses}>
-              
+
             </TableCell>
             <TableCell className={tableCellClasses}>{tasks[value]}</TableCell>
             <TableCell className={classes.tableActions}>
               <Tooltip
                 id="tooltip-top"
-                title="Edit Entry"
+                title="Edit/View Entry"
                 placement="top"
                 classes={{ tooltip: classes.tooltip }}
               >
@@ -56,11 +58,19 @@ export default function Tasks(props) {
                   aria-label="Edit"
                   className={classes.tableActionButton}
                 >
-                  <Edit
-                    className={
-                      classes.tableActionButtonIcon + " " + classes.edit
-                    }
-                  />
+                  {props.isCompleted
+                    ? <VisibilityIcon
+                      className={
+                        classes.tableActionButtonIcon + " " + classes.edit
+                      }
+                    />
+                    : <Edit
+                      className={
+                        classes.tableActionButtonIcon + " " + classes.edit
+                      }
+                    />
+                  }
+
                 </IconButton>
               </Tooltip>
             </TableCell>

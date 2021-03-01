@@ -45,6 +45,7 @@ export default function Dashboard() {
                     checkedIndexes={[0, 3]}
                     tasksIndexes={[0, 1, 2, 3]}
                     tasks={currentProjects}
+                    isCompleted={false}
                   />
                 )
               },
@@ -56,6 +57,7 @@ export default function Dashboard() {
                     checkedIndexes={[0]}
                     tasksIndexes={[0, 1]}
                     tasks={submittedProjects}
+                    isCompleted={false}
                   />
                 )
               },
@@ -77,6 +79,7 @@ export default function Dashboard() {
                     checkedIndexes={[0, 3]}
                     tasksIndexes={[0, 1, 2, 3]}
                     tasks={currentProjects}
+                    isCompleted={true}
                   />
                 )
               },
