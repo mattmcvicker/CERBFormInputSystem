@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function PQPR(props) {
+export default function CQPR(props) {
     const classes = useStyles();
 
     const [state, setState] = React.useState({
@@ -113,7 +113,15 @@ export default function PQPR(props) {
                     rows={4}
                     variant="outlined"
                 />
-                <h3>5. Please estimate how much of your CERB award you plan to request during the upcoming quarters:</h3>
+                <h3>5. Provide notice of ground breakings, ribbon cutting ceremonies, etc.</h3>
+                <TextField
+                    id="outlined-multiline-static"
+                    multiline
+                    fullWidth
+                    rows={4}
+                    variant="outlined"
+                />
+                <h3>6. Please estimate how much of your CERB award you plan to request during the upcoming quarters:</h3>
                 <h3 style={{ fontStyle: "italic" }}>If the section below is not filled out (or updated), the quarterly report will be considered incomplete and returned for completion.</h3>
                 <h5>Current Year (2021) - Do not include match dollars, only CERB funding</h5>
                 <TextField id="outlined-basic" label="Q1 Jan 1-Mar 31" variant="outlined" />

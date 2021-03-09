@@ -23,6 +23,29 @@ const useStyles = makeStyles(styles);
 
 export default function Dashboard() {
   const classes = useStyles();
+  const [submittedReports, setSubmittedReports] = React.useState(submittedProjects);
+  const submittedReportsFun = () => {
+    if (submittedReports.length == 0) {
+      return (
+        <div>
+          <h3>No submitted reports have been approved.</h3>
+          <Tasks
+            checkedIndexes={[]}
+            tasksIndexes={[]}
+            tasks={submittedProjects}
+            isCompleted={false}
+          />
+        </div>
+      );
+    }
+    return (
+      <Tasks
+        checkedIndexes={[0]}
+        tasksIndexes={[0, 1]}
+        tasks={submittedProjects}
+        isCompleted={false}
+      />);
+  }
   return (
     <div>
       <GridContainer>
@@ -37,23 +60,16 @@ export default function Dashboard() {
                 tabContent: (
                   <Tasks
                     checkedIndexes={[0, 3]}
-                    tasksIndexes={[0, 1, 2, 3]}
+                    tasksIndexes={[0, 1]}
                     tasks={currentProjects}
                     isCompleted={false}
                   />
                 )
               },
               {
-                tabName: "Submitted",
+                tabName: "Approved",
                 tabIcon: DoneOutline,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[0]}
-                    tasksIndexes={[0, 1]}
-                    tasks={submittedProjects}
-                    isCompleted={false}
-                  />
-                )
+                tabContent: submittedReportsFun()
               },
             ]}
           />
@@ -68,14 +84,15 @@ export default function Dashboard() {
               {
                 tabName: "Project History",
                 tabIcon: History,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[0, 3]}
-                    tasksIndexes={[0, 1, 2, 3]}
-                    tasks={currentProjects}
-                    isCompleted={true}
-                  />
-                )
+                tabContent: (<h3>You have no completed projects.</h3>)
+                // (
+                //   <Tasks
+                //     checkedIndexes={[0, 3]}
+                //     tasksIndexes={[0, 1, 2, 3]}
+                //     tasks={currentProjects}
+                //     isCompleted={true}
+                //   />
+                // )
               },
             ]}
           />

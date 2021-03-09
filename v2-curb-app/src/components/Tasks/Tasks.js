@@ -15,9 +15,13 @@ import Fade from '@material-ui/core/Fade';
 // @material-ui/icons
 import Edit from "@material-ui/icons/Edit";
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import Button from '@material-ui/core/Button';
+
 // core components
 import styles from "assets/jss/material-dashboard-react/components/tasksStyle.js";
 import PQPR from "../Forms/pqpr" //Planning quarterly reports form component
+import CQPR from "../Forms/cqpr"
+
 const useStyles = makeStyles(styles);
 function getModalStyle() {
   const top = 50;
@@ -33,8 +37,8 @@ function getModalStyle() {
 const ModalStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: "60%",
-    height: "60%",
+    width: "80%",
+    height: "80%",
     backgroundColor: "#eeeeee",
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
@@ -50,8 +54,12 @@ export default function Tasks(props) {
 
   const [checked, setChecked] = React.useState([...props.checkedIndexes]);
   const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
+  const [reportType, setReportType] = React.useState();
+  const [submittedProjects, setSubmittedProjects] = React.useState(props.submittedProjects);
+  console.log(props.tasks)
+  const handleOpen = (value) => {
+    console.log(value)
+    setReportType(value);
     setOpen(true);
   };
 
@@ -70,12 +78,28 @@ export default function Tasks(props) {
     setChecked(newChecked);
   };
 
+  const renderForm = () => {
+    if (reportType == 0) {
+      return(<PQPR></PQPR>)
+    } else {
+      return(<CQPR></CQPR>)
+    }
+  }
 
-  const body = (
-    <div style={modalStyle} className={ModalClasses.paper}>
-      <PQPR></PQPR>
-    </div>
-  );
+  const body = () => {
+    return (
+      <div style={modalStyle} className={ModalClasses.paper}>
+        {renderForm()}
+        <div style={{ display: "flex", justifyContent: "center", paddingTop: "20px" }}>
+          <Button onClick={() => {
+            alert("Form Submitted!");
+            handleClose();
+          }
+          } style={{ width: "75%" }} size='large' variant="contained">Submit for Approval</Button>
+        </div>
+      </div>
+    )
+  };
   const { tasksIndexes, tasks, rtlActive } = props;
   const tableCellClasses = classnames(classes.tableCell, {
     [classes.tableCellRTL]: rtlActive
@@ -99,7 +123,7 @@ export default function Tasks(props) {
                   classes={{ tooltip: classes.tooltip }}
                 >
                   <IconButton
-                    onClick={handleOpen}
+                    onClick={() => {handleOpen(value)}}
                     aria-label="Edit"
                     className={classes.tableActionButton}
                   >
@@ -136,7 +160,7 @@ export default function Tasks(props) {
           }}
         >
           <Fade in={open}>
-            {body}
+            {body()}
           </Fade>
         </Modal>
       </div>
