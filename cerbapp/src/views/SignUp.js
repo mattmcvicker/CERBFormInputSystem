@@ -12,13 +12,14 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import firebase from '../config/config'
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="https://www.commerce.wa.gov/building-infrastructure/community-economic-revitalization-board/">
+      WA Community Economic Revitalization Board
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -48,7 +49,32 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
+
+  const handleSignUp = () => {
+    //firebase.auth().createUserWithEmailAndPassword(email, password)
+    //.then(console.log("Working"))
+    // .then((userCredentials) => {
+    //     let user = userCredentials.user; //access the newly created user
+    //     console.log('User created: '+user.uid);
+    //     //...
+    // })
+    // .catch((error) => { //report any errors
+    //     console.log(error.message);
+    // });
+  }
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    console.log(email)
+  }
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  }
+  
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -93,6 +119,8 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={email}
+                onChange={handleEmailChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -105,12 +133,8 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
+                value={password}
+                onChange={handlePasswordChange}
               />
             </Grid>
           </Grid>
@@ -120,6 +144,7 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleSignUp}
           >
             Sign Up
           </Button>
