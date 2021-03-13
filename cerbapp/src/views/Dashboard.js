@@ -97,8 +97,6 @@ export default function Dashboard() {
           />
         </GridItem>
       </GridContainer>
-      <video src="https://drive.google.com/file/d/1rxXUMw-9vXLIpWlvPJqEglgvk1E2PRv7/view?ts=604826ff" type="video/mp4"></video>
-
     </div>
   );
 }
